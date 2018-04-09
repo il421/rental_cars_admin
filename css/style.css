@@ -1,0 +1,511 @@
+/*
+#EAE7DC
+#D8C3A5
+#8E8D8A
+#E98074
+#E85A4F
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 16px;
+  line-height: normal;
+
+  box-sizing: border-box;
+
+  background-color: #D8C3A5;
+}
+
+/* ADMIN NAVIGATION */
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0 auto;
+}
+
+.admin-panel__nav {
+  margin: 40px 0;
+  width: 320px;
+}
+
+.admin-nav__list {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 0 5px;
+  padding: 0;
+
+  list-style: none;
+}
+
+.admin-nav__item {
+  padding-bottom: 5px;
+
+  font-size: 14px;
+  border-bottom: 4px dashed #E85A4F;
+}
+
+.admin-nav__item:not(.admin-nav__item--active):hover {
+  border-bottom: 4px solid #8E8D8A;
+  transition: all 1s ease;
+}
+
+.admin-nav__item--active {
+  border-bottom: 4px solid #E85A4F;
+}
+
+.admin-nav__item a {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.admin-nav__item--active:hover a {
+  cursor: default;
+}
+
+/* ADMIN TABLE USERS */
+.admin-panel__users,
+.admin-panel__cars {
+  width: 320px;
+  margin-bottom: 30px;
+
+  overflow-x: auto;
+}
+
+.users,
+.cars {
+  margin: 0 5px;
+  margin-bottom: 10px;
+}
+
+.users tr:nth-child(even),
+.cars tr:nth-child(even) {
+  background-color: #8E8D8A;
+}
+
+.users td,
+.cars td {
+  width: 16.6%;
+  padding: 5px;
+
+  font-size: 12px;
+  text-align: center;
+}
+
+.users th,
+.cars th {
+  width: 16.6%;
+  padding: 5px;
+
+  font-size: 12px;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.activation input {
+  display: none;
+}
+
+.activation label {
+  position: relative;
+  cursor: pointer;
+}
+
+.activation label::after {
+  position: absolute;
+  content: "";
+
+  top: -5px;
+  left: -15px;
+
+  width: 25px;
+  height: 25px;
+
+  border: 2px solid #E85A4F;
+  background-color: white;
+  z-index: 0;
+}
+
+.activation input:checked + label::before {
+  position: absolute;
+  content: "";
+
+  top: 2px;
+  right: -7px;
+
+  width: 15px;
+  height: 15px;
+
+  background: url("../img/icon-tick.svg") no-repeat;
+  background-size: contain;
+  z-index: 10;
+}
+
+.btn-danger--modificator {
+  width: 70px;
+  margin: 3px;
+
+  font-size: 12px;
+
+  border: 0 solid #E85A4F;
+  border-radius: 0;
+  background-color: #E98074;
+
+  cursor: pointer;
+}
+
+.btn-danger--modificator:hover {
+  background-color: #E98074;
+}
+
+.btn-danger--modificator:not([disabled]):not(.disabled):active {
+  background-color: #E98074;
+}
+
+.btn-danger--update {
+  margin: 0;
+}
+
+/* ADMIN TABLE EDIT FORM */
+.admin-panel__users-edit,
+.admin-panel__cars-edit {
+  display: none;
+  position: absolute;
+
+  top: 40px;
+
+  padding: 40px;
+
+  background-color: #8E8D8A;
+  box-shadow: 0 0 40px #000000;
+
+  z-index: 20;
+}
+
+.admin-panel__users-edit--show,
+.admin-panel__cars-edit--show {
+  display: block;
+}
+
+.admin-panel__users-edit:after,
+.admin-panel__cars-edit:after {
+  position: fixed;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: -2;
+}
+
+.users-edit {
+  position: relative;
+}
+
+.cars-edit {
+  position: relative;
+}
+
+.cars-edit__flax {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.users-edit__title,
+.cars-edit__title {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+}
+
+.users-edit__close,
+.cars-edit__close {
+  position: absolute;
+
+  top: -85px;
+  right: -55px;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  background-color: black;
+
+  z-index: 0;
+  cursor: pointer;
+}
+
+.users-edit__close::after,
+.cars-edit__close::after {
+  position: absolute;
+  content: "X";
+
+  top: 11px;
+  right: 15px;
+
+  width: 10px;
+  height: 10px;
+
+  color: white;
+
+  z-index: 100;
+  cursor: pointer;
+}
+
+.users-edit__close:hover::after,
+.cars-edit__close:hover::after {
+  color: black;
+
+  transition: 2s;
+}
+
+.users-edit__close:hover,
+.cars-edit__close:hover {
+  background-color: white;
+}
+
+.users-edit__close:active,
+.cars-edit__close:active {
+  transform: scale(0.8);
+  transition: .7s;
+}
+
+.users-edit__wrapper,
+.cars-edit__wrapper {
+  display: flex;
+
+  padding: 5px 0;
+}
+
+.users-edit__wrapper input,
+.cars-edit__wrapper input {
+  width: 234px;
+  padding: 10px;
+
+  background-color: #EAE7DC;
+  border: none;
+  font-size: 14px;
+}
+
+.users-edit__wrapper .btn-danger--modificator,
+.cars-edit__wrapper .btn-danger--modificator {
+  background-color: #E85A4F;
+}
+
+.users-edit__activation input {
+  display: none;
+}
+
+.users-edit__activation label {
+  position: relative;
+  cursor: pointer;
+}
+
+.users-edit__activation label::after {
+  position: absolute;
+  content: "";
+
+  top: 6px;
+  left: 3px;
+
+  width: 25px;
+  height: 25px;
+
+  border: 2px solid #E85A4F;
+  background-color: white;
+  z-index: 0;
+}
+
+.users-edit__activation input:checked + label::before {
+  position: absolute;
+  content: "";
+
+  top: 13px;
+  left: 9px;
+
+  width: 15px;
+  height: 15px;
+
+  background: url("../img/icon-tick.svg") no-repeat;
+  background-size: contain;
+  z-index: 1000;
+}
+
+.users-edit__activation div {
+  padding-top: 8px;
+  padding-left: 50px;
+
+  color: white;
+}
+
+.admin-panel__users-edit input:read-only,
+.admin-panel__cars-edit input:read-only {
+  background-color: #E98074;
+}
+
+.file {
+  display: none;
+}
+
+.btn-danger--file {
+  width: 234px;
+  margin: 0;
+  margin-top: 5px;
+  padding: 10px 0;
+
+  font-size: 14px;
+}
+
+/* ADMIN TABLE ANALYTICS*/
+.admin-panel__analytics {
+  display: flex;
+  flex-direction: column;
+
+  width: 320px;
+  margin-bottom: 30px;
+}
+
+.analytics {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 10px;
+
+  box-shadow: 0 0 38px #8E8D8A;
+}
+
+/* ::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.some-element::webkit-scrollbar {
+} */
+
+@media (min-width: 576px) {
+  /* ADMIN TABLE */
+  .admin-panel__users,
+  .admin-panel__cars {
+    width: 576px;
+  }
+
+  .admin-panel__analytics {
+    width: 576px;
+  }
+}
+
+@media (min-width: 768px) {
+  /* ADMIN NAVIGATION */
+  .admin-panel__nav {
+    width: 500px;
+  }
+
+  .admin-nav__item {
+    font-size: 16px;
+  }
+  /* ADMIN TABLE */
+  .admin-panel__users,
+  .admin-panel__cars {
+    width: 768px;
+  }
+
+  .users td,
+  .users th,
+  .cars td,
+  .cars th {
+    padding: 10px;
+
+    font-size: 16px;
+  }
+
+  .cars-edit__flax {
+    flex-direction: row;
+    width: 768px;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .cars-edit__wrapper {
+    width: 179px;
+  }
+
+  .cars-edit__wrapper {
+    font-size: 14px;
+  }
+
+  .actions {
+    flex-direction: row;
+  }
+
+  .btn-danger--modificator {
+    font-size: 16px;
+  }
+
+  .btn-danger--add {
+    width: 145px;
+  }
+
+  .btn-danger--file {
+    margin-top: 0;
+    font-size: 14px;
+  }
+
+  /* ADMIN TABLE ANALYTICS*/
+  .admin-panel__analytics {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 768px;
+  }
+
+  .analytics {
+    margin: 5px 0;
+    width: 49%;
+    height: 400px;
+  }
+}
+
+@media (min-width: 1150px) {
+  /* ADMIN NAVIGATION */
+  .admin-panel__nav {
+    width: 700px;
+  }
+
+  .admin-nav__item {
+    font-size: 18px;
+  }
+
+  /* ADMIN TABLE */
+  .admin-panel__users,
+  .admin-panel__cars {
+    width: 1150px;
+  }
+
+  /* ADMIN TABLE ANALYTICS*/
+  .admin-panel__analytics {
+    width: 1150px;
+  }
+}
